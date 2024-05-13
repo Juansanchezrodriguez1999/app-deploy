@@ -13,6 +13,7 @@ export default async function handler(req, res) {
     }
   }
   if (count !== 0) {
+    limit = 10000000
     const parametros = req.query;
     const speciesSynonyms = parametros['Species'].split(',').filter((elemento) => elemento !== '');
     const altitude = [parametros['AltitudeMax'], parametros['AltitudeMin']];
