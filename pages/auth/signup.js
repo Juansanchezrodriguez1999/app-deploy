@@ -35,11 +35,6 @@ export default function Page() {
           toast.success('User registered successfully and ADMIN notified');
         }
       });
-    } catch (err) {
-      toast.error(err.message);
-    }
-
-    try {
       await Fetcher.get(`/api/manageUser/createUser/${data.email}/${data.username}`, {
         headers: {
           'Content-Type': 'application/json',
@@ -48,8 +43,7 @@ export default function Page() {
       setLoading(false)
     } catch (err) {
       setLoading(false)
-
-      console.log(err.message);
+      toast.error(err.message);
     }
   };
 
