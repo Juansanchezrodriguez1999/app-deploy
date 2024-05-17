@@ -20,16 +20,7 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
-    try {
-      setLoading(true)
-      await Fetcher.get(`/api/manageUser/createUser/${data.email}/${data.username}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-    } catch (err) {
-      toast.error(err.message);
-    }
+    setLoading(true)
     try {
       await Fetcher.post('/api/auth/signup', {
         method: 'POST',
@@ -46,6 +37,19 @@ export default function Page() {
       });
     } catch (err) {
       toast.error(err.message);
+    }
+
+    try {
+      await Fetcher.get(`/api/manageUser/createUser/${data.email}/${data.username}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      setLoading(false)
+    } catch (err) {
+      setLoading(false)
+
+      console.log(err.message);
     }
   };
 
